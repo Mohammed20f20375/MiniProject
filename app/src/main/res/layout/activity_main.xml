@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Table Reservation Portal - Wellcome to Rozna"
+
+            android:textSize="18sp"
+
+            android:gravity="center"
+            android:layout_marginBottom="5dp" />
+
+        <Button
+            android:id="@+id/btn_menu"
+            android:layout_width="215dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#cab69b"
+            android:text="Go to Menu"
+            android:textColor="#FFFFFF" />
+
+        <EditText
+            android:id="@+id/et_customer_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@android:drawable/edit_text"
+            android:backgroundTint="#cab69b"
+            android:hint="Please Enter your Name"
+            android:padding="12dp"
+            android:textColor="#723606"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/et_mobile_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@android:drawable/edit_text"
+            android:backgroundTint="#cab69b"
+            android:hint=" Enter Your Mobile Number"
+            android:inputType="phone"
+            android:padding="12dp"
+            android:textColor="#723606"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/et_number_of_guests"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Number of Guests"
+            android:inputType="number"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"
+            android:background="@android:drawable/edit_text"
+            android:backgroundTint="#cab69b"
+            android:textColor="#723606"
+            android:textSize="16sp" />
+
+        <CalendarView
+            android:id="@+id/calendar_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp" />
+
+        <TimePicker
+            android:id="@+id/time_picker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:timePickerMode="spinner" />
+
+        <Button
+            android:id="@+id/btn_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Booking"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="#76726e"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/btn_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View Bookings"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="#76726e"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/btn_clear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cancel Your Reserve"
+            android:backgroundTint="#F44336"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:backgroundTint="#F44336"
+            android:textColor="#FFFFFF" />
+
+
+    </LinearLayout>
+</ScrollView>
