@@ -1,8 +1,9 @@
 package com.example.bookingapp;
 
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.CalendarView;
@@ -16,7 +17,7 @@ public class Main_Activity extends AppCompatActivity {
     EditText etCustomerName, etMobileNumber, etNumberOfGuests;
     CalendarView calendarView;
     TimePicker timePicker;
-    Button btnAdd, btnView, btnClear, btnMenu , Logout;
+    Button btnAdd, btnView, btnClear, btnMenu;
     dbHelper dbh;
     String selectedDate;
 
@@ -28,12 +29,11 @@ public class Main_Activity extends AppCompatActivity {
         dbh = new dbHelper(this);
         initializeViews();
 
-
         btnMenu = findViewById(R.id.btn_menu); // Initialize btnMenu
         btnMenu.setOnClickListener(view -> {
             // Start the MenuActivity
-            Intent l = new Intent(Main_Activity.this, MenuActivity.class);
-            startActivity(l);
+            Intent intent = new Intent(Main_Activity.this, MenuActivity.class);
+            startActivity(intent);
         });
 
         calendarView.setOnDateChangeListener((view, year, month, dayOfMonth) ->
@@ -53,7 +53,6 @@ public class Main_Activity extends AppCompatActivity {
         btnAdd = findViewById(R.id.btn_add);
         btnView = findViewById(R.id.btn_view);
         btnClear = findViewById(R.id.btn_clear);
-        Logout= findViewById(R.id.logout);
     }
 
     public void addData() {
@@ -75,8 +74,36 @@ public class Main_Activity extends AppCompatActivity {
 
     public void viewBookings() {
         btnView.setOnClickListener(view -> {
+            Cursor res = dbh.getAllBookings();
+            if (res.getCount() == 0) {
+                // No bookings found
+                Toast.makeText(this, "No bookings available", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
+            // Prepare a string to display the bookings
+            StringBuilder buffer = new StringBuilder();
+            while (res.moveToNext()) {
+                buffer.append("ID: ").append(res.getString(0)).append("\n");
+                buffer.append("Name: ").append(res.getString(1)).append("\n");
+                buffer.append("Mobile: ").append(res.getString(2)).append("\n");
+                buffer.append("Guests: ").append(res.getString(3)).append("\n");
+                buffer.append("Date: ").append(res.getString(4)).append("\n");
+                buffer.append("Time: ").append(res.getString(5)).append("\n\n");
+            }
+
+            // Show bookings in a dialog
+            showAlertDialog("Bookings", buffer.toString());
         });
+    }
+
+    private void showAlertDialog(String title, String message) {
+        new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
+                .create()
+                .show();
     }
 
     public void clearData() {
@@ -88,16 +115,5 @@ public class Main_Activity extends AppCompatActivity {
             timePicker.setMinute(0);
             Toast.makeText(this, "Fields Cleared", Toast.LENGTH_SHORT).show();
         });
-
-        Logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent ss= new Intent(Main_Activity.this,Login.class);
-                startActivity(ss);
-                finish();
-            }
-        });
-
-
     }
 }
